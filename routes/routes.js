@@ -101,8 +101,7 @@ router.get('/get/book/:user_id', async (req, res) => {
             res.json({message: "Not found"});
         }else{
             res.json(data);
-        }
-        
+        }   
     }
     catch(error){
         res.status(500).json({message: error.message})
@@ -136,7 +135,7 @@ router.post('/post/entry', async (req, res) => {
 router.get('/get/entry/:book_id', async (req, res) => {
     console.log(req.params);
     try{
-        const data = await EntryModel.find({book_id: req.params.book_id});
+        const data = await EntryModel.find({book_id: req.params.book_id}).sort({date:-1});
         if(data.length === 0){
             res.json({message: "Not found"});
         }else{
